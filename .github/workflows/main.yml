@@ -27,3 +27,15 @@ jobs:
         run: docker build -t jagadeeshb1585/deploy-ec2-image .
       - name: Publish image to docker hub
         run: docker push jagadeeshb1585/deploy-ec2-image:latest
+  deploy:
+    needs: build
+    runs-on: [aws-ec2]
+    steps:
+      - name: Pull Image from docker hub
+        run: docker pull jagadeeshb1585/deploy-ec2-image:latest
+      - name: Delete old container
+        run: docker rm -f deploy-ec2-container
+      - name: Run docker container
+        run: docker run -d -p 8085:8085 --name deploy-ec2-container jagadeeshb1585/deploy-ec2-image:latest
+ 
+ 
