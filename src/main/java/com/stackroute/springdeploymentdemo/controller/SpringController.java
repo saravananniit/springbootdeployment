@@ -16,5 +16,13 @@ public class SpringController {
         return object;
     }
 
+     @GetMapping("/dummy")
+    public Object home2() {
+        Map<String, String> object = new HashMap<>();
+        object.put("message", "welcome to dummy");
+        System.out.println("Hai .. Controller");
+        return object;
+    }
+
 
 }
